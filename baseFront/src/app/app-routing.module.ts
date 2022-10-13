@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './guard/login.guard';
 
 const routes: Routes = [
   {
@@ -8,6 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivate:[LoginGuard],
     loadChildren: () => import("./pages/dashboard/dashboard.module").then(x => x.DashboardModule)
   }
 ];

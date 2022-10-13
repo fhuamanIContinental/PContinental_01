@@ -93,5 +93,24 @@ namespace pruebaED01.Controllers
             int registro = _repo.delete(id);
             return Ok(registro);
         }
+
+        [HttpGet("filter/{name}")]
+        public IActionResult getFilterByName(string name)
+        {
+            try
+            {
+                
+                return Ok("Retornando lista de personas por coincidencia de nombre");
+            }
+            catch (Exception ex)
+            {
+
+                CustomException exx = new CustomException("Error no controlado", 500, 500, "", ex);
+                throw exx;
+            }
+
+
+        }
+
     }
 }
