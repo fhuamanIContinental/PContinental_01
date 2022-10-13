@@ -1,0 +1,72 @@
+<div class="text-center">
+    <h1>MANTENIMIENTO DE PERSONAS</h1>
+    <br><br><br><br>
+
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let documento of tiposDocumentos">
+                        <td> {{documento.codigo}} </td>
+                        <td> {{documento.descripcion}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <label for="">
+        <strong>usando la directiva ngIF</strong>
+    </label>
+
+    <div class="row">
+        <div *ngIf="tipoDocumento == 'DNI'" class="col-12 text-primary">
+            La variable tipo de documento es un
+            documento nacional de identidad <strong>DNI</strong>, y su valor es de:
+            {{NroDocumento}}
+        </div>
+        <div *ngIf="tipoDocumento == 'PAS'" class="col-12 text-success">
+            La variable tipo de documento es un
+            PASAPORTE <strong>PAS</strong>, y su valor es de:
+            {{NroDocumento}}
+        </div>
+        <div *ngIf="tipoDocumento == 'CE'" class="col-12 text-danger">
+            La variable tipo de documento es un
+            CARNÉ DE EXRANJERÍA
+            <strong>CE</strong>
+            , y su valor es de:
+            {{NroDocumento}} xxxxxxxxxxx
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12" *ngIf="verSegmento; else verSegmento_false">
+            este texto se mostrara cuando se cumpla la validación
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12" [ngSwitch]="tipoDocumento">
+        <p class="text-primary" *ngSwitchCase="'DNI'">Es un documento nacional de identidad</p>
+        <p class="text-success" *ngSwitchCase="'PAS'">Es un pasaporte</p>
+        <p class="text-danger" *ngSwitchCase="'CE'">Es un Carné de extranjería</p>
+    </div>
+</div>
+
+
+
+<ng-template #verSegmento_false>
+    <label class="text-danger">
+        No cumplio con la condición
+    </label>
+</ng-template>

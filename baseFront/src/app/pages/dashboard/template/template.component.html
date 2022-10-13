@@ -1,0 +1,28 @@
+<!-- start header template -->
+<app-template-header></app-template-header>
+<!-- end header template -->
+
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <app-template-sidebar></app-template-sidebar>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Start Bootstrap
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="mt-3">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </main>
+        <app-template-footer></app-template-footer>
+    </div>
+</div>
