@@ -20,7 +20,6 @@ export class LoginGuard implements CanActivate {
 
     //validar si el token existe en nuestra aplicación
     let token = this._sessionService.getVarSession("token");
-      debugger;
     if(token != null && token != undefined && token != "")
     {
       console.log("retorna true");

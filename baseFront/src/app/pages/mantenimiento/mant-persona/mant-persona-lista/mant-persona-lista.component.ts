@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonaModel } from 'src/app/models/persona.model';
+import { PersonaService } from 'src/app/service/persona.service';
 
 @Component({
   selector: 'app-mant-persona-lista',
@@ -7,28 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MantPersonaListaComponent implements OnInit {
 
+  /*
+    PERSONA
+      TIPO DE DOCUMENTO
+      NRO DE DOCUMENTO
+      FULL NAME
+      GENERO 
+  */
+  personas: PersonaModel[] = [];
 
-  tipoDocumento: string = "DNI";
-  NroDocumento: string = "00000001";
-  verSegmento: boolean = false;
-  tiposDocumentos: any[] = [
-    { codigo: 'DNI', descripcion: 'Documento Nacional de Identidad' },
-    { codigo: 'CE', descripcion: 'Carné de extranjería' },
-    { codigo: 'PAS', descripcion: 'Pasaporte' }
-  ];
-
-  constructor() { }
+  constructor(
+    private _personaService: PersonaService
+  ) { }
 
   ngOnInit(): void {
 
-    setTimeout(() => {
-      this.tipoDocumento = "CE";
-      setTimeout(() => {
-        this.tipoDocumento = "PAS";
-      }, 3000);
+    console.log("primer metodo a ejecutarse");
+    this.getAllPersonas();
+  }
 
-    }, 3000);
+  getAllPersonas() {
+    this._personaService.getAll().subscribe(
+      (data: PersonaModel[]) => {
+        this.personas = data;
+        console.log(data);
 
+      },
+      err => {
+        console.log("ocurrio un error", err);
+
+      }
+    );
 
   }
 

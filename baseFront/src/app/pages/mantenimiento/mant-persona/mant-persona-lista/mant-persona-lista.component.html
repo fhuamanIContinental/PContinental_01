@@ -1,72 +1,97 @@
-<div class="text-center">
-    <h1>MANTENIMIENTO DE PERSONAS</h1>
-    <br><br><br><br>
+<div class="container-fluid">
+    <h4 class="titulo-manteimiento">Mantenimiento de Persona</h4>
 
-
+    <!-- iniciando seccion filtro -->
     <div class="row">
+        <div class="col-3">
+            <label for="">Tipo de documento</label>
+            <select class="form-select">
+                <option value="null">Todos</option>
+                <option value="DNI">DNI</option>
+                <option value="CE">CE</option>
+                <option value="PAS">PAS</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <label for="">Nro de documento</label>
+            <input class="form-control" type="text" placeholder="Ingrese número de documento">
+        </div>
+        <div class="col-3">
+            <label for="">Nombre Completo</label>
+            <input class="form-control" type="text" placeholder="Ingrese nombre">
+        </div>
+        <div class="col-3">
+            <label for="">Genero</label>
+            <select class="form-select">
+                <option value="null">Todos</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-2">
         <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let documento of tiposDocumentos">
-                        <td> {{documento.codigo}} </td>
-                        <td> {{documento.descripcion}} </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <label for="">
-        <strong>usando la directiva ngIF</strong>
-    </label>
-
-    <div class="row">
-        <div *ngIf="tipoDocumento == 'DNI'" class="col-12 text-primary">
-            La variable tipo de documento es un
-            documento nacional de identidad <strong>DNI</strong>, y su valor es de:
-            {{NroDocumento}}
-        </div>
-        <div *ngIf="tipoDocumento == 'PAS'" class="col-12 text-success">
-            La variable tipo de documento es un
-            PASAPORTE <strong>PAS</strong>, y su valor es de:
-            {{NroDocumento}}
-        </div>
-        <div *ngIf="tipoDocumento == 'CE'" class="col-12 text-danger">
-            La variable tipo de documento es un
-            CARNÉ DE EXRANJERÍA
-            <strong>CE</strong>
-            , y su valor es de:
-            {{NroDocumento}} xxxxxxxxxxx
+            <button class="btn btn-sm btn-primary float-right mr-1">
+                <i class="fas fa-search"></i> Buscar
+            </button>
+            <button class="btn btn-sm btn-danger float-right mr-1">
+                <i class="fas fa-broom"></i> Limpiar XX
+            </button>
         </div>
 
     </div>
-    <div class="row">
-        <div class="col-12" *ngIf="verSegmento; else verSegmento_false">
-            este texto se mostrara cuando se cumpla la validación
+    <!-- terminado seccion filtro -->
+
+    <!-- iniciando tabla de contenido -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tip Doc</th>
+                            <th>Nro Doc</th>
+                            <th>Tip Per</th>
+                            <th>Nombre</th>
+                            <th>Ape Paterno</th>
+                            <th>Ape Materno</th>
+                            <th>Nombre Completo</th>
+                            <th>Genero</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>
+                                <button class="btn btn-success btn-sm">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- foreach for -->
+                        <tr *ngFor="let item of personas" >
+                            <td> {{item.tipo_documento}} </td>
+                            <td> {{item.numero_documento}} </td>
+                            <td> {{item.tipo_persona}} </td>
+                            <td> {{item.nombre}} </td>
+                            <td> {{item.apellido_paterno}} </td>
+                            <td> {{item.apellido_materno}} </td>
+                            <td> {{item.full_name}} </td>
+                            <td> {{item.genero}} </td>
+                            <!-- usar pipes ==> transformador el texto a un tipo de formato -->
+                            <td> {{item.fecha_nacimiento | date:"dd/MM/yyyy "}} </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm mr-1">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm mr-1">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <!-- terminando tabla de contenido -->
+
 </div>
-
-
-<div class="row">
-    <div class="col-12" [ngSwitch]="tipoDocumento">
-        <p class="text-primary" *ngSwitchCase="'DNI'">Es un documento nacional de identidad</p>
-        <p class="text-success" *ngSwitchCase="'PAS'">Es un pasaporte</p>
-        <p class="text-danger" *ngSwitchCase="'CE'">Es un Carné de extranjería</p>
-    </div>
-</div>
-
-
-
-<ng-template #verSegmento_false>
-    <label class="text-danger">
-        No cumplio con la condición
-    </label>
-</ng-template>

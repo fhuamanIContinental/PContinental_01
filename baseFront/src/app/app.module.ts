@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule,//nos va a permitir comunicarnos con nuestro back end (getm post, put, delete, patch, ....)
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
