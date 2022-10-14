@@ -59,7 +59,7 @@
                             <th>Genero</th>
                             <th>Fecha de Nacimiento</th>
                             <th>
-                                <button class="btn btn-success btn-sm">
+                                <button (click)="NuevaPersona(personaregistro)" class="btn btn-success btn-sm">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </th>
@@ -67,7 +67,7 @@
                     </thead>
                     <tbody>
                         <!-- foreach for -->
-                        <tr *ngFor="let item of personas" >
+                        <tr *ngFor="let item of personas">
                             <td> {{item.tipo_documento}} </td>
                             <td> {{item.numero_documento}} </td>
                             <td> {{item.tipo_persona}} </td>
@@ -79,10 +79,11 @@
                             <!-- usar pipes ==> transformador el texto a un tipo de formato -->
                             <td> {{item.fecha_nacimiento | date:"dd/MM/yyyy "}} </td>
                             <td>
-                                <button class="btn btn-primary btn-sm mr-1">
+                                <button (click)="editarPersona(item,personaregistro)"
+                                    class="btn btn-primary btn-sm mr-1">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-danger btn-sm mr-1">
+                                <button (click)="deletePersona(item.id)" class="btn btn-danger btn-sm mr-1">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -93,5 +94,14 @@
         </div>
     </div>
     <!-- terminando tabla de contenido -->
+
+    <button type="button" class="btn btn-primary" (click)="openModal(personaregistro)">Create template modal</button>
+    <ng-template #personaregistro>
+        <app-mant-persona-registro 
+        [titulo]="tituloModal"
+        [persona]="personaSeleccionada"
+        (closeModalEmit)="recibeFuncionCerrarModal($event)"
+        ></app-mant-persona-registro>
+    </ng-template>
 
 </div>

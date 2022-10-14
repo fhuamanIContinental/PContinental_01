@@ -1,1 +1,71 @@
-<p>mant-persona-registro works!</p>
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{titulo}}</h4>
+    <button (click)="cerrarModal(true)" type="button" class="close pull-right" aria-label="Close">
+        <span class="text-danger" aria-hidden="true">&times;</span>
+    </button>
+
+</div>
+<div class="modal-body">
+    <form [formGroup]="formularioPersona" class="">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Código de persona</label>
+                    <input class="form-control" formControlName="id" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">tipo_documento</label>
+                    <select class="form-select" formControlName="tipo_documento">
+                        <option value="null">Todos</option>
+                        <option value="DNI">DNI</option>
+                        <option value="CE">CE</option>
+                        <option value="PAS">PAS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Número de documento</label>
+                    <input class="form-control" formControlName="numero_documento" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Tipo de Persona</label>
+                    <select class="form-select" formControlName="tipo_persona">
+                        <option value="N">Natural</option>
+                        <option value="J">Juridico</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input class="form-control" formControlName="nombre" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Apellido Paterno</label>
+                    <input class="form-control" formControlName="apellido_paterno" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Apellido Materno</label>
+                    <input class="form-control" formControlName="apellido_materno" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre Completo</label>
+                    <input class="form-control" formControlName="full_name" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Genero / Sexo</label>
+                    <select class="form-select" formControlName="genero">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button (click)="cerrarModal(true)" class="float-right btn btn-danger btn-sm mr-2">
+                        <i class="fas fa-ban"></i> Cancelar
+                    </button>
+                    <button [disabled]="formularioPersona.invalid" (click)="guardarDatos()" class="float-right btn btn-primary btn-sm mr-2">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

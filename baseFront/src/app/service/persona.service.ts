@@ -16,11 +16,11 @@ export class PersonaService {
   getAll(): Observable<PersonaModel[]> {
     return this._http.get<PersonaModel[]>(this.url);
   }
-  create(request: PersonaModel) {
-    return this._http.post(this.url, request);
+  create(request: PersonaModel): Observable<PersonaModel> {
+    return this._http.post<PersonaModel>(this.url, request);
   }
-  update(request: PersonaModel) {
-    return this._http.put(this.url, request);
+  update(request: PersonaModel): Observable<PersonaModel> {
+    return this._http.put<PersonaModel>(this.url, request);
   }
   delete(id: number) {
     return this._http.delete(`${this.url}${id}`)
