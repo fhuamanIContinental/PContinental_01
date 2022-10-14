@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using pruebaED01.Model;
+using pruebaED01.Model.RequestResponse;
 
 namespace pruebaED01.Repositorio
 {
@@ -51,6 +52,64 @@ namespace pruebaED01.Repositorio
             return db.SaveChanges();
         }
 
+
+        public GenericFilterResponse<Persona> getPersonasPorFiltro(GenericFilterRequest filter)
+        {
+
+            GenericFilterResponse<Persona> res = new GenericFilterResponse<Persona>();
+
+            List<Persona> lista = new List<Persona>();
+            //
+            var query = db.Persona.Where(x => x.Id == x.Id);
+            filter.filters.ForEach(item => { 
+            
+                if(item.value != "")
+                {
+                    switch(item.name.ToLower())
+                    {
+                        case "id":
+                            query = query.Where(x => x.Id == int.Parse(item.value));
+                            break;
+                        case "tipo_documento":
+                            // .Contains ==> select * from persona where nombre like '%fran%'
+                            query = query.Where(x => x.tipo_documento.ToLower().Contains(item.value.ToLower()));
+                            break;
+                        case "numero_documento":
+                            query = query.Where(x => x.numero_documento.ToLower().Contains(item.value.ToLower()));
+                            break;
+                        case "tipo_persona":
+                            query = query.Where(x => x.tipo_persona.ToLower().Contains(item.value.ToLower()));
+                            break;
+                        case "full_name":
+                            query = query.Where(x => x.full_name.ToLower().Contains(item.value.ToLower()));
+                            break;
+                        case "genero": query = query.Where(x => x.genero.ToLower().Contains(item.value.ToLower()));
+                            break;
+                    }
+
+                }
+
+
+
+            });
+
+            //query.OrderBy(x => x.apellido_paterno).ThenBy(x => x.apellido_materno);
+            //if (filter.orders.Count > 0)
+            //{
+            //    filter.orders.ForEach(item => {
+            //        query = query.OrderBy(x => x.nombre);
+            //    });
+            //}
+
+            // select * from persona where ........ limit 4;
+            res.registros_totales = query.Count();
+            res.list = query
+                .Skip((filter.page - 1) * filter.quantity).Take(filter.quantity).ToList();
+
+
+
+            return res;
+        }
 
     }
 }

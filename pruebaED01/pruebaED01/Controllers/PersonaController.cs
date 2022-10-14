@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using pruebaED01.Model;
 using pruebaED01.Model.Common;
+using pruebaED01.Model.RequestResponse;
 using pruebaED01.Repositorio;
 using static pruebaED01.CustomSecurity.AuthorizeByRoleAttribute;
 
@@ -77,6 +78,13 @@ namespace pruebaED01.Controllers
             Persona registro = _repo.create(request);
             return Ok(registro);
         }
+
+        [HttpPost("filter")]
+        public IActionResult getPersonsByFilter([FromBody] GenericFilterRequest request )
+        {
+            return Ok(_repo.getPersonasPorFiltro(request));
+        }
+
 
         [HttpPut]
         public IActionResult update([FromBody] Persona request)
