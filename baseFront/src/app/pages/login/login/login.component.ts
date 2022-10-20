@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { sessionConstant } from 'src/app/constantes/session.constants';
 import { LoginRequestModel } from 'src/app/models/common/login-request.model';
 import { LoginService } from 'src/app/service/login.service';
 import { SessionService } from 'src/app/service/session.service';
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
     this._loginService.login(this.loginRequest).subscribe(
       (result: any) => {
         console.log("result ==> ", result);
-        this._SessionService.setVarSession("token", result.token)
+        this._SessionService.setVarSession(sessionConstant.token, result.token)
         this._router.navigate(["dashboard"]);
       },
       (err:any) => {

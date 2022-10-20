@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { urlBack } from '../constantes/url.constants';
 import { LoginRequestModel } from '../models/common/login-request.model';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { LoginRequestModel } from '../models/common/login-request.model';
 })
 export class LoginService {
 
-  url: string = "https://localhost:7237/api/Auth";
+  url: string = urlBack.login;
   constructor(
     protected http: HttpClient,
   ) { }

@@ -14,7 +14,7 @@ namespace pruebaED01.Controllers
     //QUE SI LA PETICIÓN NO TIENE EL TOKEN CORRESPONDIENTE 
     //A ESTE SE LE VA A DENEGAR LAS ACCIONES QUE OFRECE ESTE CONTROLADOR
 
-    //[Authorize]
+    [Authorize]
     //[Authorize(Roles = "Administrator,RecursosHumanos")]
     //[RolesAuthorizeAttribute(recursos_humanos, administrador, contabilidad)]
     //Mostrar las opciones de menú por cada tipo de perfil

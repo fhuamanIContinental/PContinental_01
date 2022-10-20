@@ -14,6 +14,9 @@ import { MantEmpleadoRegistroComponent } from './mant-empleado-registro/mant-emp
   imports: [
     CommonModule,
     MantEmpleadoRoutingModule
+  ],
+  exports:[
+    // MantEmpleadoListaComponent
   ]
 })
 export class MantEmpleadoModule { }
