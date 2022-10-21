@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace pruebaED01.Model
+namespace pruebaED01.Database
 {
     [Table("persona", Schema = "persona")]
     [Index("NumeroDocumento", Name = "IX_persona_numero_documento", IsUnique = true)]

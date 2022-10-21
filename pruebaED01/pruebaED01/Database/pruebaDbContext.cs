@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace pruebaED01.Model
+namespace pruebaED01.Database
 {
-    public partial class _dbContext : DbContext
+    public partial class pruebaDbContext : DbContext
     {
-        public _dbContext()
+        public pruebaDbContext()
         {
         }
 
-        public _dbContext(DbContextOptions<_dbContext> options)
+        public pruebaDbContext(DbContextOptions<pruebaDbContext> options)
             : base(options)
         {
         }
@@ -26,14 +26,11 @@ namespace pruebaED01.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            IConfigurationBuilder configurationBuild = new ConfigurationBuilder();
-            configurationBuild = configurationBuild.AddJsonFile("appsettings.json");
-            IConfiguration configurationFile = configurationBuild.Build();
-
-            // Leemos el archivo de configuración.
-            optionsBuilder.EnableSensitiveDataLogging();
-            string conneccion = configurationFile.GetConnectionString("dbInstituto");
-            optionsBuilder.UseSqlServer(conneccion);
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=dbInstituto;Integrated Security=True");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
