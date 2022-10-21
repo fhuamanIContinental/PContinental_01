@@ -9,15 +9,15 @@ namespace pruebaED01.Repositorio
         _dbContext db = new _dbContext();
         public List<Persona> getAll()
         {
-            List<Persona> lst = db.Persona.ToList();
+            List<Persona> lst = db.Personas.ToList();
             return lst;
         }
 
         public List<Persona> getAllComplete()
         {
             List<Persona> lst = 
-                db.Persona
-                .Include(x => x.direcciones)
+                db.Personas
+                .Include(x => x.PersonaDireccions)
                 .ToList();
             return lst;
         }
@@ -25,14 +25,14 @@ namespace pruebaED01.Repositorio
 
         public Persona getById(int id)
         {
-            Persona registro = db.Persona.Find(id);
+            Persona registro = db.Personas.Find(id);
             return registro;
         }
 
         public Persona create(Persona request)
         {
             //INSERT INTO 
-            db.Persona.Add(request);
+            db.Personas.Add(request);
             db.SaveChanges();
             return request;
         }
@@ -40,15 +40,15 @@ namespace pruebaED01.Repositorio
         public Persona update(Persona request)
         {
             //UPDATE TABLE SET COLUMN 1 = AAS
-            db.Persona.Update(request);
+            db.Personas.Update(request);
             db.SaveChanges();
             return request;
         }
 
         public int delete(int id)
         {
-            Persona registro = db.Persona.Find(id);
-            db.Persona.Remove(registro);
+            Persona registro = db.Personas.Find(id);
+            db.Personas.Remove(registro);
             return db.SaveChanges();
         }
 
@@ -60,7 +60,7 @@ namespace pruebaED01.Repositorio
 
             List<Persona> lista = new List<Persona>();
             //
-            var query = db.Persona.Where(x => x.Id == x.Id);
+            var query = db.Personas.Where(x => x.Id == x.Id);
             filter.filters.ForEach(item => { 
             
                 if(item.value != "")
@@ -72,18 +72,18 @@ namespace pruebaED01.Repositorio
                             break;
                         case "tipo_documento":
                             // .Contains ==> select * from persona where nombre like '%fran%'
-                            query = query.Where(x => x.tipo_documento.ToLower().Contains(item.value.ToLower()));
+                            query = query.Where(x => x.TipoDocumento.ToLower().Contains(item.value.ToLower()));
                             break;
                         case "numero_documento":
-                            query = query.Where(x => x.numero_documento.ToLower().Contains(item.value.ToLower()));
+                            query = query.Where(x => x.NumeroDocumento.ToLower().Contains(item.value.ToLower()));
                             break;
                         case "tipo_persona":
-                            query = query.Where(x => x.tipo_persona.ToLower().Contains(item.value.ToLower()));
+                            query = query.Where(x => x.TipoPersona.ToLower().Contains(item.value.ToLower()));
                             break;
                         case "full_name":
-                            query = query.Where(x => x.full_name.ToLower().Contains(item.value.ToLower()));
+                            query = query.Where(x => x.FullName.ToLower().Contains(item.value.ToLower()));
                             break;
-                        case "genero": query = query.Where(x => x.genero.ToLower().Contains(item.value.ToLower()));
+                        case "genero": query = query.Where(x => x.Genero.ToLower().Contains(item.value.ToLower()));
                             break;
                     }
 

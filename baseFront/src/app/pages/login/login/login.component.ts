@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       (result: any) => {
         console.log("result ==> ", result);
         this._SessionService.setVarSession(sessionConstant.token, result.token)
+        this._SessionService.setVarSession(sessionConstant.id_role, "4")
         this._router.navigate(["dashboard"]);
       },
       (err:any) => {

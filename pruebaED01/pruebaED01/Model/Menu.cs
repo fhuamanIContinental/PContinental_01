@@ -35,5 +35,7 @@ namespace pruebaED01.Model
 
         [InverseProperty("IdMenuNavigation")]
         public virtual ICollection<MenuRole> MenuRoles { get; set; }
+
+        
     }
 }

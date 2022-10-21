@@ -8,15 +8,15 @@ namespace pruebaED01.Repositorio
         _dbContext db = new _dbContext();
         public List<PersonaDireccion> getAll()
         {
-            List<PersonaDireccion> lst = db.PersonaDireccion.ToList();
+            List<PersonaDireccion> lst = db.PersonaDireccions.ToList();
             return lst;
         }
 
         public List<PersonaDireccion> getAllComplete()
         {
             List<PersonaDireccion> lst = 
-                db.PersonaDireccion
-                .Include(x => x.PersonaTipoDireccion)
+                db.PersonaDireccions
+                //.Include(x => x.PersonaTipoDireccion)
                 .ToList();
             return lst;
         }
@@ -24,14 +24,14 @@ namespace pruebaED01.Repositorio
 
         public PersonaDireccion getById(int id)
         {
-            PersonaDireccion registro = db.PersonaDireccion.Find(id);
+            PersonaDireccion registro = db.PersonaDireccions.Find(id);
             return registro;
         }
 
         public PersonaDireccion create(PersonaDireccion request)
         {
             //INSERT INTO 
-            db.PersonaDireccion.Add(request);
+            db.PersonaDireccions.Add(request);
             db.SaveChanges();
             return request;
         }
@@ -39,15 +39,15 @@ namespace pruebaED01.Repositorio
         public PersonaDireccion update(PersonaDireccion request)
         {
             //UPDATE TABLE SET COLUMN 1 = AAS
-            db.PersonaDireccion.Update(request);
+            db.PersonaDireccions.Update(request);
             db.SaveChanges();
             return request;
         }
 
         public int delete(int id)
         {
-            PersonaDireccion registro = db.PersonaDireccion.Find(id);
-            db.PersonaDireccion.Remove(registro);
+            PersonaDireccion registro = db.PersonaDireccions.Find(id);
+            db.PersonaDireccions.Remove(registro);
             return db.SaveChanges();
         }
 

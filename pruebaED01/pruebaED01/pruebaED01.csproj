@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Database\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Repositorio\Interfaces\" />
   </ItemGroup>
 
 </Project>

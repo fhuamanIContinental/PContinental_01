@@ -68,16 +68,16 @@
                     <tbody>
                         <!-- foreach for -->
                         <tr *ngFor="let item of personas">
-                            <td> {{item.tipo_documento}} </td>
-                            <td> {{item.numero_documento}} </td>
-                            <td> {{item.tipo_persona}} </td>
+                            <td> {{item.tipoDocumento}} </td>
+                            <td> {{item.numeroDocumento}} </td>
+                            <td> {{item.tipoPersona}} </td>
                             <td> {{item.nombre}} </td>
-                            <td> {{item.apellido_paterno}} </td>
-                            <td> {{item.apellido_materno}} </td>
-                            <td> {{item.full_name}} </td>
+                            <td> {{item.apellidoPaterno}} </td>
+                            <td> {{item.apellidoMaterno}} </td>
+                            <td> {{item.fullName}} </td>
                             <td> {{item.genero}} </td>
                             <!-- usar pipes ==> transformador el texto a un tipo de formato -->
-                            <td> {{item.fecha_nacimiento | date:"dd/MM/yyyy "}} </td>
+                            <td> {{item.fechaNacimiento | date:"dd/MM/yyyy "}} </td>
                             <td>
                                 <button (click)="editarPersona(item,personaregistro)"
                                     class="btn btn-primary btn-sm mr-1">

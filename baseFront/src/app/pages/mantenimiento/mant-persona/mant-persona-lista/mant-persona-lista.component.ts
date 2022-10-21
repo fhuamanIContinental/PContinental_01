@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { PersonaModel } from 'src/app/models/persona.model';
 import { PersonaService } from 'src/app/service/persona.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { bsConfigModal } from 'src/app/constantes/modal.constants';
 @Component({
   selector: 'app-mant-persona-lista',
   templateUrl: './mant-persona-lista.component.html',
@@ -63,7 +64,13 @@ export class MantPersonaListaComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    //this.modalRef = this.modalService.show(template);
+    this.modalRef =
+      this.modalService.show(
+        template,
+        Object.assign({}, { class: "gray modal-xl" },
+          bsConfigModal));
+
   }
 
   recibeFuncionCerrarModal(res: boolean) {

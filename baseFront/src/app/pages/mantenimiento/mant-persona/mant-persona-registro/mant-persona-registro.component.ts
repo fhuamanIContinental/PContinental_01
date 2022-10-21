@@ -24,19 +24,20 @@ export class MantPersonaRegistroComponent implements OnInit {
     //expresiones regulares
     this.formularioPersona = this.fb.group({
       id: [{ value: null, disabled: true }, [Validators.required]],
-      tipo_documento: [null, [Validators.required]],
-      numero_documento: [null, [Validators.maxLength(15), Validators.minLength(8)]],
-      tipo_persona: [null, [Validators.required]],
+      tipoDocumento: [null, [Validators.required]],
+      numeroDocumento: [null, [Validators.required,Validators.maxLength(15), Validators.minLength(8), Validators.email]],
+      tipoPersona: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
-      apellido_paterno: [null, [Validators.required]],
-      apellido_materno: [null, [Validators.required]],
-      full_name: [{ value: null, disabled: true }, []],
+      apellidoPaterno: [null, [Validators.required]],
+      apellidoMaterno: [null, [Validators.required]],
+      fullName: [{ value: null, disabled: true }, []],
       genero: [null, [Validators.required]],
-      fecha_nacimiento: [null, [Validators.required]],
-      fecha_registro: [null, [Validators.required]]
+      fechaNacimiento: [null, [Validators.required]],
+      fechaRegistro: [null, [Validators.required]]
     });
   }
 
+  get f() { return this.formularioPersona.controls; }
   ngOnInit(): void {
     //ASIGNAR UN VALOR A UN CONTROL EN ESPECIFICO
     // this.formularioPersona.controls["full_name"]?.setValue("NOMBRE COMPLETO");
@@ -47,9 +48,9 @@ export class MantPersonaRegistroComponent implements OnInit {
 
 
     this.formularioPersona.patchValue(this.persona);
-    this.formularioPersona.get("full_name")?.setValue("NOMBRE COMPLETO");
-    this.formularioPersona.controls["fecha_nacimiento"].setValue(new Date());
-    this.formularioPersona.controls["fecha_registro"].setValue(new Date());
+    this.formularioPersona.get("fullName")?.setValue("NOMBRE COMPLETO");
+    this.formularioPersona.controls["fechaNacimiento"].setValue(new Date());
+    this.formularioPersona.controls["fechaRegistro"].setValue(new Date());
     console.log(this.persona);
 
   }
@@ -61,8 +62,8 @@ export class MantPersonaRegistroComponent implements OnInit {
 
   guardarDatos() {
 
-    this.formularioPersona.controls["fecha_nacimiento"].setValue(new Date());
-    this.formularioPersona.controls["fecha_registro"].setValue(new Date());
+    this.formularioPersona.controls["fechaNacimiento"].setValue(new Date());
+    this.formularioPersona.controls["fechaRegistro"].setValue(new Date());
     //esta es una forma de obtener los datos del formulario
     //pero no trae el valor de los con controles que esten inhabilitados
     // let formData = this.formularioPersona.value;

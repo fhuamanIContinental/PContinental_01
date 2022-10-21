@@ -1,6 +1,7 @@
 import { environment } from "src/environments/environment";
 
 export const urlBack = {
-    login: `${environment.urlBack}auth`,
-    persona: `${environment.urlBack}persona`
+    login: `${environment.urlBack}auth/`,
+    persona: `${environment.urlBack}persona/`,
+    menu: `${environment.urlBack}menu/`
 }
