@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using pruebaED01.Constantes;
+using pruebaED01.Model;
 using pruebaED01.Model.Common;
 using pruebaED01.Negocio;
 using System.Net;
@@ -10,11 +12,18 @@ namespace pruebaED01.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    //[AllowAnonymous]
+    //[Authorize]
+    [AllowAnonymous]
     public class MenuController : ControllerBase
     {
-        MenuNegocio _menuNegocio = new MenuNegocio();
+        private readonly IMenuNegocio<Menu> _menu;
+        private readonly IMapper _mapper;
+        public MenuController(IMapper mapper)
+        {
+            _mapper = mapper;
+            _menu = new MenuNegocio(mapper);
+        }
+
         //localhost:7258/api/menu (get post put delete)
         //Verbo ==> GET POST PUT DELETE
         //[HttpVerbo("asignación de ruta personalizada/{id}/{id_persona}")] ==> id significa una variable
@@ -27,7 +36,7 @@ namespace pruebaED01.Controllers
         {
             try
             {
-                List<MenuResponse> response = _menuNegocio.getByRole(id);
+                List<MenuResponse> response = _menu.getByRole(id);
                 return Ok(response);
             }
             catch (Exception ex)

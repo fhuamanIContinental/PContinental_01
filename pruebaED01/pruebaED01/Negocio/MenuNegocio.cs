@@ -1,13 +1,19 @@
-﻿using pruebaED01.Model;
+﻿using AutoMapper;
+using pruebaED01.Model;
 using pruebaED01.Model.Common;
 using pruebaED01.Repositorio;
 
 namespace pruebaED01.Negocio
 {
-    public class MenuNegocio
+    public class MenuNegocio:IMenuNegocio<Menu>
     {
-
         MenuRepositorio _menuRepositorio = new MenuRepositorio();
+        private readonly IMapper _mapper;
+        public MenuNegocio(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
 
 
         public List<Menu> getAll()
@@ -79,34 +85,38 @@ namespace pruebaED01.Negocio
             listPadre = list.Where(x => x.Padre == 0).ToList();
 
 
-            //vamos a pasar el modelo de Menu a MenuResponse
-            listPadre.ForEach(x => {
-                MenuResponse tmp = new MenuResponse();
-                tmp.Id = x.Id;
-                tmp.Name = x.Name;
-                tmp.Description = x.Description;
-                tmp.Icon = x.Icon;
-                tmp.Datatarget = x.Datatarget;
-                tmp.Url = x.Url;
-                tmp.Padre = x.Padre;
-                tmp.IdStatus = x.IdStatus;
-                tmp.SubMenu = new List<MenuResponse>();
-                listPadreResponse.Add(tmp);
-            });
+            listPadreResponse = _mapper.Map<List<MenuResponse>>(listPadre);
+            listResponse = _mapper.Map<List<MenuResponse>>(list);
 
-            list.ForEach(x => {
-                MenuResponse tmp = new MenuResponse();
-                tmp.Id = x.Id;
-                tmp.Name = x.Name;
-                tmp.Description = x.Description;
-                tmp.Icon = x.Icon;
-                tmp.Datatarget = x.Datatarget;
-                tmp.Url = x.Url;
-                tmp.Padre = x.Padre;
-                tmp.IdStatus = x.IdStatus;
-                tmp.SubMenu = new List<MenuResponse>();
-                listResponse.Add(tmp);
-            });
+
+            ////vamos a pasar el modelo de Menu a MenuResponse
+            //listPadre.ForEach(x => {
+            //    MenuResponse tmp = new MenuResponse();
+            //    tmp.Id = x.Id;
+            //    tmp.Name = x.Name;
+            //    tmp.Description = x.Description;
+            //    tmp.Icon = x.Icon;
+            //    tmp.Datatarget = x.Datatarget;
+            //    tmp.Url = x.Url;
+            //    tmp.Padre = x.Padre;
+            //    tmp.IdStatus = x.IdStatus;
+            //    tmp.SubMenu = new List<MenuResponse>();
+            //    listPadreResponse.Add(tmp);
+            //});
+
+            //list.ForEach(x => {
+            //    MenuResponse tmp = new MenuResponse();
+            //    tmp.Id = x.Id;
+            //    tmp.Name = x.Name;
+            //    tmp.Description = x.Description;
+            //    tmp.Icon = x.Icon;
+            //    tmp.Datatarget = x.Datatarget;
+            //    tmp.Url = x.Url;
+            //    tmp.Padre = x.Padre;
+            //    tmp.IdStatus = x.IdStatus;
+            //    tmp.SubMenu = new List<MenuResponse>();
+            //    listResponse.Add(tmp);
+            //});
 
             listPadreResponse.ForEach(x => {
                 x.SubMenu = listResponse.Where(t => t.Padre == x.Id).ToList();
